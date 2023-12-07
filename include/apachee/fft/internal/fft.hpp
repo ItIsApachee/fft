@@ -10,9 +10,11 @@
 
 namespace apachee::fft::internal {
 
-using base_float = std::double_t;
+namespace constants {
 
-base_float PI = std::acos(-1);
+std::double_t PI = std::acos(-1);
+
+}  // namespace constants
 
 template<typename RandomIt>
 void fft(RandomIt first, RandomIt last, bool inverse = false) {
@@ -20,8 +22,8 @@ void fft(RandomIt first, RandomIt last, bool inverse = false) {
     if (sequence_size == 0)
         return;
 
-    int sequence_size_log2 = std::bit_width(sequence_size) - 1;
-    assert((int64_t{1} << sequence_size_log2) == n);
+    int sequence_size_log2 = std::bit_width(static_cast<std::uint64_t>(sequence_size)) - 1;
+    assert((int64_t{1} << sequence_size_log2) == sequence_size);
 
     {
         std::vector<int64_t> result = reverse_bits_batch(sequence_size_log2);
@@ -35,13 +37,13 @@ void fft(RandomIt first, RandomIt last, bool inverse = false) {
     for (int block_size = 2; block_size <= sequence_size; block_size *= 2) {
         int half_block_size = block_size / 2;
 
-        base_float power = 2 * (inverse ? -1 : 1) * PI / block_size;
-        std::complex<base_float> w0 = exp(std::complex<base_float>{0.0L, power});
+        std::double_t power = 2 * (inverse ? -1 : 1) * constants::PI / block_size;
+        std::complex<std::double_t> w0 = exp(std::complex<std::double_t>{0.0L, power});
         for (int i = 0; i < sequence_size; i += block_size) {
-            std::complex<base_float> w = 1;
+            std::complex<std::double_t> w = 1;
             for (int j = 0; j < half_block_size; j++, w *= w0) {
-                std::complex<base_float> x = *(first + i + j);
-                std::complex<base_float> y = *(first + i + j + half_block_size);
+                std::complex<std::double_t> x = *(first + i + j);
+                std::complex<std::double_t> y = *(first + i + j + half_block_size);
                 y *= w;
 
                 *(first + i + j) = x + y;
@@ -52,7 +54,7 @@ void fft(RandomIt first, RandomIt last, bool inverse = false) {
 
     if (inverse) {
         for (int i = 0; i < sequence_size; i++)
-            *(first + i) /= static_cast<base_float>(sequence_size);
+            *(first + i) /= static_cast<std::double_t>(sequence_size);
     }
 }
 
