@@ -80,5 +80,6 @@ void print_poly(const poly_t& poly, std::string poly_name = "") {
 
     // everything is 0
     if (!has_prev)
-        std::cout << 0 << std::endl;
+        std::cout << 0;
+    std::cout << std::endl;
 }
