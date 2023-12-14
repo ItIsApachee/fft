@@ -1,3 +1,5 @@
+#pragma once
+
 #include <complex>
 #include <cmath>
 #include <bit>
@@ -5,8 +7,6 @@
 #include <stdint.h>
 
 #include <apachee/fft/internal/reverse_bits.h>
-
-#pragma once
 
 namespace apachee::fft::internal {
 

@@ -1,8 +1,8 @@
+#pragma once
+
 #include <vector>
 #include <cassert>
 #include <stdint.h>
-
-#pragma once
 
 namespace apachee::fft::internal {
 
