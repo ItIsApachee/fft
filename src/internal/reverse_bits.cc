@@ -8,6 +8,7 @@ namespace apachee::fft::internal {
 
 
 
+std::vector<std::vector<int64_t>> reverse_bits_batch_cache;
 
 const std::vector<int64_t>& reverse_bits_batch(int bits) {
     if (reverse_bits_batch_cache.size() <= bits)
