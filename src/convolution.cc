@@ -32,6 +32,7 @@ convolution(
     std::vector<complex_t> b(b_.size());
     for (int64_t i = 0; i < b_.size(); i++)
         b[i] = b_[i];
+    b.resize(result_size, 0);
 
     internal::fft(complex_result.begin(), complex_result.end());
     internal::fft(b.begin(), b.end());
@@ -70,6 +71,7 @@ complex_convolution(
     std::vector<complex_t> b(b_.size());
     for (int64_t i = 0; i < b_.size(); i++)
         b[i] = b_[i];
+    b.resize(result_size, 0);
 
     internal::fft(complex_result.begin(), complex_result.end());
     internal::fft(b.begin(), b.end());
