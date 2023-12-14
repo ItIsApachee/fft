@@ -2,7 +2,7 @@
 #include <numbers>
 #include <cassert>
 
-#include <apachee/fft/fft.hpp>
+#include <apachee/fft.hpp>
 #include "utils.hpp"
 
 int main() {

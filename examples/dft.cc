@@ -2,7 +2,7 @@
 #include <bit>
 #include <stdint.h>
 
-#include <apachee/fft/fft.hpp>
+#include <apachee/fft.hpp>
 #include "utils.hpp"
 
 int main() {
